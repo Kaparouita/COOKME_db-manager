@@ -1,1 +1,1 @@
-# db-manager
+# github.com/Kaparouita/db-manager
