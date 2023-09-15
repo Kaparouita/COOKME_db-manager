@@ -1,12 +1,16 @@
-package domain
+package models
 
-import "time"
+import (
+	"time"
+
+	"github.com/Kaparouita/models/models"
+)
 
 type Order struct {
 	Id              uint `json:"id" gorm:"primaryKey"`
 	CreatedAt       time.Time
-	IngridientRefer int        `json:"Ingridient_id"`
-	Ingridient      Ingridient `gorm:"foreignKey:IngridientRefer"`
-	UserRefer       int        `json:"user_id"`
-	User            User       `gorm:"foreignKey:UserRefer"`
+	IngredientRefer int               `json:"Ingredient_id"`
+	Ingredient      models.Ingredient `gorm:"foreignKey:IngredientRefer"`
+	UserRefer       int               `json:"user_id"`
+	User            models.User       `gorm:"foreignKey:UserRefer"`
 }

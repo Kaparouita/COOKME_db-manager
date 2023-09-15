@@ -1,64 +1,72 @@
 package ports
 
 import (
-	"github.com/Kaparouita/db-manager/domain"
-
+	"github.com/Kaparouita/models/models"
 	"github.com/gofiber/fiber/v2"
 )
 
 type Service interface {
 	InitFunction() error
-	GetIngridients(pagin *domain.IngridientPagin) (*domain.IngridientResponse, error)
-	SaveIngridient(Ingridient *domain.Ingridient) *domain.Response
-	UpdateIngridient(Ingridient *domain.Ingridient) *domain.Response
-	GetIngridient(Ingridient *domain.Ingridient) (*domain.Ingridient, *domain.Response)
-	DeleteIngridient(Ingridient *domain.Ingridient) *domain.Response
-	GetIngridientsPerUni(group string) ([]domain.IngridientsPerUni, *domain.Response)
+	SaveIngredient(Ingredient *models.Ingredient) *models.Response
+	UpdateIngredient(Ingredient *models.Ingredient) *models.Response
+	GetIngredient(Ingredient *models.Ingredient) (*models.Ingredient, *models.Response)
+	DeleteIngredient(Ingredient *models.Ingredient) *models.Response
 
-	Register(user *domain.User) *domain.User
-	GetUsers() ([]domain.User, error)
-	UpdateUser(user *domain.User) *domain.User
-	GetUser(user *domain.User) *domain.User
-	DeleteUser(user *domain.User) *domain.Response
-	ReviewIngridient(review *domain.Review) *domain.Response
-	GetUserPerType(group string) ([]domain.UserPerType, *domain.Response)
+	Register(user *models.User) *models.User
+	GetUsers() ([]models.User, error)
+	UpdateUser(user *models.User) *models.User
+	GetUser(user *models.User) *models.User
+	DeleteUser(user *models.User) *models.Response
 
-	Login(login *domain.LoginResp) *domain.User
+	Login(login *models.LoginResp) *models.User
 }
 
 type Db interface {
-	SaveIngridient(Ingridient *domain.Ingridient) error
-	GetIngridients(pagin *domain.IngridientPagin) (*domain.IngridientResponse, error)
-	UpdateIngridient(Ingridient *domain.Ingridient) error
-	GetIngridient(Ingridient *domain.Ingridient) error
-	DeleteIngridient(Ingridient *domain.Ingridient) error
-	GetIngridientsPerUni(groupField string) ([]domain.IngridientsPerUni, error)
+	SaveIngredient(Ingredient *models.Ingredient) error
+	UpdateIngredient(Ingredient *models.Ingredient) error
+	GetIngredient(Ingredient *models.Ingredient) error
+	GetIngredients() ([]models.Ingredient, error)
+	DeleteIngredient(Ingredient *models.Ingredient) error
 
-	SaveUser(user *domain.User) error
-	GetUsers() ([]domain.User, error)
-	UpdateUser(user *domain.User) error
-	GetUser(user *domain.User) error
-	DeleteUser(user *domain.User) error
-	GetUserPerUserType(groupField string) ([]domain.UserPerType, error)
+	SaveMarketIngredient(MarketIngredient *models.MarketIngredient) error
+	UpdateMarketIngredient(MarketIngredient *models.MarketIngredient) error
+	GetMarketIngredient(MarketIngredient *models.MarketIngredient) error
+	GetMarketIngredients() ([]models.MarketIngredient, error)
+	DeleteMarketIngredient(MarketIngredient *models.MarketIngredient) error
 
-	Login(login *domain.LoginResp) (*domain.User, error)
+	SaveRecipe(Recipe *models.Recipe) error
+	UpdateRecipe(Recipe *models.Recipe) error
+	GetRecipe(Recipe *models.Recipe) error
+	GetRecipes() ([]models.Recipe, error)
+	DeleteRecipe(Recipe *models.Recipe) error
+
+	SaveFinalRecipe(FinalRecipe *models.FinalRecipe) error
+	UpdateFinalRecipe(FinalRecipe *models.FinalRecipe) error
+	GetFinalRecipe(FinalRecipe *models.FinalRecipe) error
+	GetFinalRecipes() ([]models.FinalRecipe, error)
+	DeleteFinalRecipe(FinalRecipe *models.FinalRecipe) error
+
+	SaveUser(user *models.User) error
+	GetUsers() ([]models.User, error)
+	UpdateUser(user *models.User) error
+	GetUser(user *models.User) error
+	DeleteUser(user *models.User) error
+
+	Login(login *models.LoginResp) (*models.User, error)
 }
 
 type Handler interface {
-	SaveIngridient(c *fiber.Ctx) error
-	UpdateIngridient(c *fiber.Ctx) error
-	GetIngridient(c *fiber.Ctx) error
-	GetIngridients(c *fiber.Ctx) error
-	DeleteIngridient(c *fiber.Ctx) error
-	GetIngridientsPerUni(c *fiber.Ctx) error
+	SaveIngredient(c *fiber.Ctx) error
+	UpdateIngredient(c *fiber.Ctx) error
+	GetIngredient(c *fiber.Ctx) error
+	GetIngredients(c *fiber.Ctx) error
+	DeleteIngredient(c *fiber.Ctx) error
 
 	Register(c *fiber.Ctx) error
 	UpdateUser(c *fiber.Ctx) error
 	GetUser(c *fiber.Ctx) error
 	GetUsers(c *fiber.Ctx) error
 	DeleteUser(c *fiber.Ctx) error
-	ReviewIngridient(c *fiber.Ctx) error
-	GetUsersPerType(c *fiber.Ctx) error
 
 	Login(c *fiber.Ctx) error
 }

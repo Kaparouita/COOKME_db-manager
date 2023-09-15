@@ -1,12 +1,12 @@
 package main
 
 import (
-	"github.com/Kaparouita/db-manager/core"
-	"github.com/Kaparouita/db-manager/handlers"
-	"github.com/Kaparouita/db-manager/repositories"
-	"github.com/Kaparouita/db-manager/server"
 	"log"
 
+	"db-manager/core"
+	"db-manager/repositories"
+
+	"github.com/Kaparouita/models/models"
 	"github.com/joho/godotenv"
 )
 
@@ -19,12 +19,10 @@ func main() {
 
 	db := repositories.NewDbRepo()
 	srv := core.NewService(db)
-	handler := handlers.NewHandler(srv)
-	server := server.NewService(handler)
+	srv.GetUser(&models.User{})
+	//handler := handlers.NewHandler(srv)
+	//server := server.NewService(handler)
 
-	//initDB with 5 Ingridients
-	srv.InitFunction()
-
-	server.Initialize()
+	//server.Initialize()
 
 }

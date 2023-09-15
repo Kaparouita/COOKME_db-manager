@@ -5,8 +5,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/Kaparouita/db-manager/domain"
-
+	"github.com/Kaparouita/models/models"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
@@ -38,14 +37,13 @@ func connectDb() (*gorm.DB, error) {
 
 	//Create the tables
 	db.AutoMigrate(
-		&domain.Address{},
-		&domain.Paso{},
-		&domain.Order{},
-		&domain.Review{},
+		&models.Ingredient{},
+		&models.Recipe{},
+		&models.MarketIngredient{},
 	)
 
 	db.AutoMigrate(
-		&domain.Ingridient{},
-		&domain.User{})
+		&models.FinalRecipe{},
+		&models.User{})
 	return db, nil
 }
