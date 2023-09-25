@@ -1,23 +1,32 @@
 package server
 
 import (
+	"db-manager/ports"
+
+	"github.com/Kaparouita/models/rabbitmq"
 	"github.com/streadway/amqp"
 	// Other necessary imports
 )
 
-func initRabbitMQ() (*amqp.Connection, error) {
-	// Initialize RabbitMQ connection here
-	conn, err := amqp.Dial("amqp://guest:guest@localhost:5672/") // Modify connection string as needed
-	if err != nil {
-		return nil, err
-	}
-	return conn, nil
+type Server struct {
+	IngredientHandler ports.IngredentHandler
+	RecipeHandler     ports.RecipeHandler
+	UserHandler       ports.UserHandler
 }
 
-func declareQueues(ch *amqp.Channel) error {
+func NewService(ingredientHandler ports.IngredentHandler, recipeHandler ports.RecipeHandler, userHandler ports.UserHandler) *Server {
+	return &Server{
+		ingredientHandler,
+		recipeHandler,
+		userHandler,
+	}
+}
+
+func (server *Server) DeclareQueues(ch *amqp.Channel) error {
 	// Declare queues here
 	// Example:
 	_, err := ch.QueueDeclare("SaveRecipeQueue", false, false, false, false, nil)
+	rabbitmq.RegisterConsumer(server.RecipeHandler.SaveRecipe, ch, "SaveRecipeQueue", "SaveRecipeQueue")
 	if err != nil {
 		return err
 	}

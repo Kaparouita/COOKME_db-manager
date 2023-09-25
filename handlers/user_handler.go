@@ -1,5 +1,8 @@
 package handlers
 
+//create a rabbitmq connection
+
+/*
 func handleMessage(message Message) {
 	switch message.Operation {
 	case "GetRecipe":
@@ -16,3 +19,4 @@ func handleMessage(message Message) {
 		// Unknown operation, handle accordingly
 	}
 }
+*/

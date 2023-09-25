@@ -1,12 +1,17 @@
 package core
 
 import (
+	"db-manager/ports"
 	"fmt"
 
 	"github.com/Kaparouita/models/models"
 )
 
-func (srv *Service) SaveIngredient(Ingredient *models.Ingredient) *models.Response {
+type IngredientService struct {
+	db ports.Db
+}
+
+func (srv *IngredientService) SaveIngredient(Ingredient *models.Ingredient) *models.Response {
 	resp := &models.Response{}
 	err := srv.db.SaveIngredient(Ingredient)
 	if err != nil {
@@ -18,7 +23,7 @@ func (srv *Service) SaveIngredient(Ingredient *models.Ingredient) *models.Respon
 	return resp
 }
 
-func (srv *Service) UpdateIngredient(Ingredient *models.Ingredient) *models.Response {
+func (srv *IngredientService) UpdateIngredient(Ingredient *models.Ingredient) *models.Response {
 	resp := &models.Response{}
 	err := srv.db.UpdateIngredient(Ingredient)
 	if err != nil {
@@ -30,7 +35,7 @@ func (srv *Service) UpdateIngredient(Ingredient *models.Ingredient) *models.Resp
 	return resp
 }
 
-func (srv *Service) GetIngredient(Ingredient *models.Ingredient) (*models.Ingredient, *models.Response) {
+func (srv *IngredientService) GetIngredient(Ingredient *models.Ingredient) (*models.Ingredient, *models.Response) {
 	resp := &models.Response{}
 	err := srv.db.GetIngredient(Ingredient)
 	if err != nil {
@@ -42,7 +47,7 @@ func (srv *Service) GetIngredient(Ingredient *models.Ingredient) (*models.Ingred
 	return Ingredient, resp
 }
 
-func (srv *Service) DeleteIngredient(Ingredient *models.Ingredient) *models.Response {
+func (srv *IngredientService) DeleteIngredient(Ingredient *models.Ingredient) *models.Response {
 	resp := &models.Response{}
 	err := srv.db.DeleteIngredient(Ingredient)
 	if err != nil {
@@ -55,7 +60,7 @@ func (srv *Service) DeleteIngredient(Ingredient *models.Ingredient) *models.Resp
 	return resp
 }
 
-func (srv *Service) GetIngredients() ([]models.Ingredient, error) {
+func (srv *IngredientService) GetIngredients() ([]models.Ingredient, error) {
 	Ingredients, err := srv.db.GetIngredients()
 	if err != nil {
 		return nil, err
@@ -65,7 +70,7 @@ func (srv *Service) GetIngredients() ([]models.Ingredient, error) {
 
 //-----------------------------------MarketIngredient---------------------------------------//
 
-func (srv *Service) SaveMarketIngredient(MarketIngredient *models.MarketIngredient) *models.Response {
+func (srv *IngredientService) SaveMarketIngredient(MarketIngredient *models.MarketIngredient) *models.Response {
 	resp := &models.Response{}
 	err := srv.db.SaveMarketIngredient(MarketIngredient)
 	if err != nil {
@@ -77,7 +82,7 @@ func (srv *Service) SaveMarketIngredient(MarketIngredient *models.MarketIngredie
 	return resp
 }
 
-func (srv *Service) UpdateMarketIngredient(MarketIngredient *models.MarketIngredient) *models.Response {
+func (srv *IngredientService) UpdateMarketIngredient(MarketIngredient *models.MarketIngredient) *models.Response {
 	resp := &models.Response{}
 	err := srv.db.UpdateMarketIngredient(MarketIngredient)
 	if err != nil {
@@ -89,7 +94,7 @@ func (srv *Service) UpdateMarketIngredient(MarketIngredient *models.MarketIngred
 	return resp
 }
 
-func (srv *Service) GetMarketIngredient(MarketIngredient *models.MarketIngredient) (*models.MarketIngredient, *models.Response) {
+func (srv *IngredientService) GetMarketIngredient(MarketIngredient *models.MarketIngredient) (*models.MarketIngredient, *models.Response) {
 	resp := &models.Response{}
 	err := srv.db.GetMarketIngredient(MarketIngredient)
 	if err != nil {
@@ -101,7 +106,7 @@ func (srv *Service) GetMarketIngredient(MarketIngredient *models.MarketIngredien
 	return MarketIngredient, resp
 }
 
-func (srv *Service) DeleteMarketIngredient(MarketIngredient *models.MarketIngredient) *models.Response {
+func (srv *IngredientService) DeleteMarketIngredient(MarketIngredient *models.MarketIngredient) *models.Response {
 	resp := &models.Response{}
 	err := srv.db.DeleteMarketIngredient(MarketIngredient)
 	if err != nil {
@@ -114,7 +119,7 @@ func (srv *Service) DeleteMarketIngredient(MarketIngredient *models.MarketIngred
 	return resp
 }
 
-func (srv *Service) GetMarketIngredients() ([]models.MarketIngredient, error) {
+func (srv *IngredientService) GetMarketIngredients() ([]models.MarketIngredient, error) {
 	MarketIngredients, err := srv.db.GetMarketIngredients()
 	if err != nil {
 		return nil, err

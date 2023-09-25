@@ -3,7 +3,7 @@ module db-manager
 go 1.20
 
 require (
-	github.com/Kaparouita/models v0.0.0-20230915125258-fb9fb92101c9 // indirect
+	github.com/Kaparouita/models v0.0.0-20230925131045-4b006b33b084 // indirect
 	github.com/andybalholm/brotli v1.0.5 // indirect
 	github.com/gofiber/fiber/v2 v2.49.2 // indirect
 	github.com/google/uuid v1.3.1 // indirect
@@ -18,6 +18,7 @@ require (
 	github.com/mattn/go-isatty v0.0.19 // indirect
 	github.com/mattn/go-runewidth v0.0.15 // indirect
 	github.com/rivo/uniseg v0.2.0 // indirect
+	github.com/rs/zerolog v1.31.0 // indirect
 	github.com/streadway/amqp v1.1.0 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasthttp v1.49.0 // indirect
