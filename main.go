@@ -21,6 +21,7 @@ func main() {
 
 	rc := make(chan bool)
 	handler.AutoRedial(os.Getenv("RABBITMQ_DIAL"), rc)
+
 	fmt.Println("Start server")
 
 	// go func() {
