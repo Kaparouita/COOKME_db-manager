@@ -1,13 +1,24 @@
 FROM golang:1.18
 
-WORKDIR /go/src/github.com/Kaparouita/db-manager
+WORKDIR /go/src/module
 
-COPY . .
-COPY .env.docker .env
+COPY *.go ./
+COPY core core
+COPY handlers handlers
+COPY ports ports
+COPY repositories repositories
+COPY server server
+COPY ./.env.docker .env
+COPY go.mod .
+COPY go.sum .
 
-
-RUN go mod vendor
+COPY vendor/ /go/src/module/vendor
 RUN go build -ldflags="-s -w" -mod=vendor
+RUN ls -a
 
-CMD "./github.com/Kaparouita/db-manager"
-
+FROM debian:12-slim
+WORKDIR /bridge
+COPY --from=builder /go/src/module/db /bridge/db
+COPY --from=builder /go/src/module/.env /bridge/.env
+RUN ls
+CMD "./db"

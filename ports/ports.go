@@ -6,12 +6,6 @@ import (
 )
 
 type IngredientService interface {
-	SaveIngredient(Ingredient *models.Ingredient) *models.Response
-	UpdateIngredient(Ingredient *models.Ingredient) *models.Response
-	GetIngredient(Ingredient *models.Ingredient) (*models.Ingredient, *models.Response)
-	DeleteIngredient(Ingredient *models.Ingredient) *models.Response
-	GetIngredients() ([]models.Ingredient, error)
-
 	SaveMarketIngredient(MarketIngredient *models.MarketIngredient) *models.Response
 	UpdateMarketIngredient(MarketIngredient *models.MarketIngredient) *models.Response
 	GetMarketIngredient(MarketIngredient *models.MarketIngredient) (*models.MarketIngredient, *models.Response)
@@ -44,12 +38,6 @@ type UserService interface {
 }
 
 type Db interface {
-	SaveIngredient(Ingredient *models.Ingredient) error
-	UpdateIngredient(Ingredient *models.Ingredient) error
-	GetIngredient(Ingredient *models.Ingredient) error
-	GetIngredients() ([]models.Ingredient, error)
-	DeleteIngredient(Ingredient *models.Ingredient) error
-
 	SaveMarketIngredient(MarketIngredient *models.MarketIngredient) error
 	UpdateMarketIngredient(MarketIngredient *models.MarketIngredient) error
 	GetMarketIngredient(MarketIngredient *models.MarketIngredient) error

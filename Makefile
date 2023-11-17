@@ -1,14 +1,7 @@
 server:
 	go run main.go
 
-build:
+build-db:
 	go build -o bin/server main.go
 
-up:
-	docker-compose up 
-
-down:
-	docker-compose down
-
-d.build:
-	docker-compose --build up
+include ./image.mk

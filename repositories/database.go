@@ -37,7 +37,6 @@ func connectDb() (*gorm.DB, error) {
 
 	//Create the tables
 	db.AutoMigrate(
-		&models.Ingredient{},
 		&models.Recipe{},
 		&models.MarketIngredient{},
 	)

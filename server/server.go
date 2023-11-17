@@ -2,9 +2,6 @@ package server
 
 import (
 	"db-manager/ports"
-
-	"github.com/Kaparouita/models/rabbitmq"
-	"github.com/streadway/amqp"
 	// Other necessary imports
 )
 
@@ -20,16 +17,4 @@ func NewService(ingredientHandler ports.IngredentHandler, recipeHandler ports.Re
 		recipeHandler,
 		userHandler,
 	}
-}
-
-func (server *Server) DeclareQueues(ch *amqp.Channel) error {
-	// Declare queues here
-	// Example:
-	_, err := ch.QueueDeclare("SaveRecipeQueue", false, false, false, false, nil)
-	rabbitmq.RegisterConsumer(server.RecipeHandler.SaveRecipe, ch, "SaveRecipeQueue", "SaveRecipeQueue")
-	if err != nil {
-		return err
-	}
-	// Declare other queues
-	return nil
 }
