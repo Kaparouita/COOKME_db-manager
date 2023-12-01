@@ -1,12 +1,23 @@
 package core
 
 import (
+	"db-manager/ports"
 	"fmt"
 
 	"github.com/Kaparouita/models/models"
 )
 
-func (srv *Service) SaveRecipe(Recipe *models.Recipe) *models.Response {
+type RecipeService struct {
+	db ports.Db
+}
+
+func NewRecipeService(db ports.Db) *RecipeService {
+	return &RecipeService{
+		db: db,
+	}
+}
+
+func (srv *RecipeService) SaveRecipe(Recipe *models.Recipe) *models.Response {
 	resp := &models.Response{}
 	err := srv.db.SaveRecipe(Recipe)
 	if err != nil {
@@ -18,7 +29,7 @@ func (srv *Service) SaveRecipe(Recipe *models.Recipe) *models.Response {
 	return resp
 }
 
-func (srv *Service) UpdateRecipe(Recipe *models.Recipe) *models.Response {
+func (srv *RecipeService) UpdateRecipe(Recipe *models.Recipe) *models.Response {
 	resp := &models.Response{}
 	err := srv.db.UpdateRecipe(Recipe)
 	if err != nil {
@@ -30,7 +41,7 @@ func (srv *Service) UpdateRecipe(Recipe *models.Recipe) *models.Response {
 	return resp
 }
 
-func (srv *Service) GetRecipe(Recipe *models.Recipe) (*models.Recipe, *models.Response) {
+func (srv *RecipeService) GetRecipe(Recipe *models.Recipe) (*models.Recipe, *models.Response) {
 	resp := &models.Response{}
 	err := srv.db.GetRecipe(Recipe)
 	if err != nil {
@@ -42,7 +53,7 @@ func (srv *Service) GetRecipe(Recipe *models.Recipe) (*models.Recipe, *models.Re
 	return Recipe, resp
 }
 
-func (srv *Service) DeleteRecipe(Recipe *models.Recipe) *models.Response {
+func (srv *RecipeService) DeleteRecipe(Recipe *models.Recipe) *models.Response {
 	resp := &models.Response{}
 	err := srv.db.DeleteRecipe(Recipe)
 	if err != nil {
@@ -55,7 +66,7 @@ func (srv *Service) DeleteRecipe(Recipe *models.Recipe) *models.Response {
 	return resp
 }
 
-func (srv *Service) GetRecipes() ([]models.Recipe, error) {
+func (srv *RecipeService) GetRecipes() ([]models.Recipe, error) {
 	Recipes, err := srv.db.GetRecipes()
 	if err != nil {
 		return nil, err
@@ -65,7 +76,7 @@ func (srv *Service) GetRecipes() ([]models.Recipe, error) {
 
 //-----------------------------------FinalRecipe---------------------------------------//
 
-func (srv *Service) SaveFinalRecipe(FinalRecipe *models.FinalRecipe) *models.Response {
+func (srv *RecipeService) SaveFinalRecipe(FinalRecipe *models.FinalRecipe) *models.Response {
 	resp := &models.Response{}
 	err := srv.db.SaveFinalRecipe(FinalRecipe)
 	if err != nil {
@@ -77,7 +88,7 @@ func (srv *Service) SaveFinalRecipe(FinalRecipe *models.FinalRecipe) *models.Res
 	return resp
 }
 
-func (srv *Service) UpdateFinalRecipe(FinalRecipe *models.FinalRecipe) *models.Response {
+func (srv *RecipeService) UpdateFinalRecipe(FinalRecipe *models.FinalRecipe) *models.Response {
 	resp := &models.Response{}
 	err := srv.db.UpdateFinalRecipe(FinalRecipe)
 	if err != nil {
@@ -89,7 +100,7 @@ func (srv *Service) UpdateFinalRecipe(FinalRecipe *models.FinalRecipe) *models.R
 	return resp
 }
 
-func (srv *Service) GetFinalRecipe(FinalRecipe *models.FinalRecipe) (*models.FinalRecipe, *models.Response) {
+func (srv *RecipeService) GetFinalRecipe(FinalRecipe *models.FinalRecipe) (*models.FinalRecipe, *models.Response) {
 	resp := &models.Response{}
 	err := srv.db.GetFinalRecipe(FinalRecipe)
 	if err != nil {
@@ -101,7 +112,7 @@ func (srv *Service) GetFinalRecipe(FinalRecipe *models.FinalRecipe) (*models.Fin
 	return FinalRecipe, resp
 }
 
-func (srv *Service) DeleteFinalRecipe(FinalRecipe *models.FinalRecipe) *models.Response {
+func (srv *RecipeService) DeleteFinalRecipe(FinalRecipe *models.FinalRecipe) *models.Response {
 	resp := &models.Response{}
 	err := srv.db.DeleteFinalRecipe(FinalRecipe)
 	if err != nil {
@@ -114,7 +125,7 @@ func (srv *Service) DeleteFinalRecipe(FinalRecipe *models.FinalRecipe) *models.R
 	return resp
 }
 
-func (srv *Service) GetFinalRecipes() ([]models.FinalRecipe, error) {
+func (srv *RecipeService) GetFinalRecipes() ([]models.FinalRecipe, error) {
 	FinalRecipes, err := srv.db.GetFinalRecipes()
 	if err != nil {
 		return nil, err

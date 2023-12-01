@@ -28,7 +28,7 @@ func connectDb() (*gorm.DB, error) {
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 
 	if err != nil {
-		return nil, fmt.Errorf("Failed to connect to database: %v", err)
+		return nil, fmt.Errorf("failed to connect to database: %v", err)
 	}
 
 	log.Println("Successfully connected to database")
@@ -37,11 +37,10 @@ func connectDb() (*gorm.DB, error) {
 
 	//Create the tables
 	db.AutoMigrate(
+		&models.Article{},
+		&models.RecipeInfo{},
 		&models.Recipe{},
 		&models.MarketIngredient{},
-	)
-
-	db.AutoMigrate(
 		&models.FinalRecipe{},
 		&models.User{})
 	return db, nil

@@ -7,17 +7,17 @@ import (
 	"github.com/Kaparouita/models/models"
 )
 
-type Service struct {
+type UserService struct {
 	db ports.Db
 }
 
-func NewService(db ports.Db) *Service {
-	return &Service{
+func NewUserService(db ports.Db) *UserService {
+	return &UserService{
 		db,
 	}
 }
 
-func (srv *Service) Register(user *models.User) *models.User {
+func (srv *UserService) Register(user *models.User) *models.User {
 	err := srv.db.SaveUser(user)
 	if err != nil {
 		user.StatusCode = 400
@@ -28,7 +28,7 @@ func (srv *Service) Register(user *models.User) *models.User {
 	return user
 }
 
-func (srv *Service) UpdateUser(user *models.User) *models.User {
+func (srv *UserService) UpdateUser(user *models.User) *models.User {
 	err := srv.db.UpdateUser(user)
 	if err != nil {
 		user.StatusCode = 400
@@ -39,7 +39,7 @@ func (srv *Service) UpdateUser(user *models.User) *models.User {
 	return user
 }
 
-func (srv *Service) GetUser(user *models.User) *models.User {
+func (srv *UserService) GetUser(user *models.User) *models.User {
 	err := srv.db.GetUser(user)
 	if err != nil {
 		user.StatusCode = 400
@@ -50,7 +50,7 @@ func (srv *Service) GetUser(user *models.User) *models.User {
 	return user
 }
 
-func (srv *Service) DeleteUser(user *models.User) *models.Response {
+func (srv *UserService) DeleteUser(user *models.User) *models.Response {
 	resp := &models.Response{}
 	err := srv.db.DeleteUser(user)
 	if err != nil {
@@ -63,7 +63,7 @@ func (srv *Service) DeleteUser(user *models.User) *models.Response {
 	return resp
 }
 
-func (srv *Service) GetUsers() ([]models.User, error) {
+func (srv *UserService) GetUsers() ([]models.User, error) {
 	users, err := srv.db.GetUsers()
 	if err != nil {
 		return nil, err
@@ -71,7 +71,7 @@ func (srv *Service) GetUsers() ([]models.User, error) {
 	return users, nil
 }
 
-func (srv *Service) Login(login *models.LoginResp) *models.User {
+func (srv *UserService) Login(login *models.LoginResp) *models.User {
 	user, err := srv.db.Login(login)
 	if err != nil || user.Username == "" {
 		user.StatusCode = 400

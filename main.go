@@ -1,10 +1,15 @@
 package main
 
 import (
+	"db-manager/core"
+	"db-manager/handlers"
+	"db-manager/repositories"
+	"db-manager/server"
 	"fmt"
 	"log"
 	"os"
 
+	"github.com/Kaparouita/models/models"
 	"github.com/Kaparouita/models/myrabbit/amqp"
 
 	"github.com/joho/godotenv"
@@ -26,13 +31,26 @@ func main() {
 
 	// go func() {
 	// 	for ; true; <-rc {
-	// 		// db := repositories.NewDbRepo(handler)
-	// 		// srv := core.NewGenerateService(db)
-	// 		// generateHandler := handlers.NewHandler(srv, handler)
-	// 		// generateHandler.InitServer()
+	db := repositories.NewDbRepo()
+	recipeService := core.NewRecipeService(db)
+	ingredientService := core.NewIngredientService(db)
+	userService := core.NewUserService(db)
+
+	recipeHandler := handlers.NewRecipeHandler(recipeService, handler)
+	ingedientHandler := handlers.NewIngredientHandler(ingredientService, handler)
+	userHandler := handlers.NewUserHandler(userService, handler)
+
+	server := server.NewServer(ingedientHandler, recipeHandler, userHandler)
+	server.Initialize(handler)
+
+	user := &models.User{
+		Username: "test",
+		Password: "test",
+	}
+	userService.Register(user)
 	// 	}
 	// }()
-	// for here to read all plugins
+
 	forever := make(chan bool)
 
 	<-forever

@@ -2,7 +2,7 @@ package ports
 
 import (
 	"github.com/Kaparouita/models/models"
-	"github.com/streadway/amqp"
+	"github.com/Kaparouita/models/myrabbit"
 )
 
 type IngredientService interface {
@@ -66,39 +66,32 @@ type Db interface {
 }
 
 type IngredentHandler interface {
-	SaveIngredient(msgs <-chan amqp.Delivery, pubCh amqp.Channel, subCh amqp.Channel) error
-	UpdateIngredient(msgs <-chan amqp.Delivery, pubCh amqp.Channel, subCh amqp.Channel) error
-	GetIngredient(msgs <-chan amqp.Delivery, pubCh amqp.Channel, subCh amqp.Channel) error
-	GetIngredients(msgs <-chan amqp.Delivery, pubCh amqp.Channel, subCh amqp.Channel) error
-	DeleteIngredient(msgs <-chan amqp.Delivery, pubCh amqp.Channel, subCh amqp.Channel) error
-
-	SaveMarketIngredient(msgs <-chan amqp.Delivery, pubCh amqp.Channel, subCh amqp.Channel) error
-	UpdateMarketIngredient(msgs <-chan amqp.Delivery, pubCh amqp.Channel, subCh amqp.Channel) error
-	GetMarketIngredient(msgs <-chan amqp.Delivery, pubCh amqp.Channel, subCh amqp.Channel) error
-	GetMarketIngredients(msgs <-chan amqp.Delivery, pubCh amqp.Channel, subCh amqp.Channel) error
-	DeleteMarketIngredient(msgs <-chan amqp.Delivery, pubCh amqp.Channel, subCh amqp.Channel) error
+	SaveMarketIngredient(msgs <-chan myrabbit.Delivery, pubCh myrabbit.Channel, subCh myrabbit.Channel)
+	UpdateMarketIngredient(msgs <-chan myrabbit.Delivery, pubCh myrabbit.Channel, subCh myrabbit.Channel)
+	GetMarketIngredient(msgs <-chan myrabbit.Delivery, pubCh myrabbit.Channel, subCh myrabbit.Channel)
+	GetMarketIngredients(msgs <-chan myrabbit.Delivery, pubCh myrabbit.Channel, subCh myrabbit.Channel)
+	DeleteMarketIngredient(msgs <-chan myrabbit.Delivery, pubCh myrabbit.Channel, subCh myrabbit.Channel)
 }
 
 type RecipeHandler interface {
-	SaveRecipe(msgs <-chan amqp.Delivery, pubCh amqp.Channel, subCh amqp.Channel) error
-	UpdateRecipe(msgs <-chan amqp.Delivery, pubCh amqp.Channel, subCh amqp.Channel) error
-	GetRecipe(msgs <-chan amqp.Delivery, pubCh amqp.Channel, subCh amqp.Channel) error
-	GetRecipes(msgs <-chan amqp.Delivery, pubCh amqp.Channel, subCh amqp.Channel) error
-	DeleteRecipe(msgs <-chan amqp.Delivery, pubCh amqp.Channel, subCh amqp.Channel) error
+	SaveRecipe(msgs <-chan myrabbit.Delivery, pubCh myrabbit.Channel, subCh myrabbit.Channel)
+	UpdateRecipe(msgs <-chan myrabbit.Delivery, pubCh myrabbit.Channel, subCh myrabbit.Channel)
+	GetRecipe(msgs <-chan myrabbit.Delivery, pubCh myrabbit.Channel, subCh myrabbit.Channel)
+	GetRecipes(msgs <-chan myrabbit.Delivery, pubCh myrabbit.Channel, subCh myrabbit.Channel)
+	DeleteRecipe(msgs <-chan myrabbit.Delivery, pubCh myrabbit.Channel, subCh myrabbit.Channel)
 
-	SaveFinalRecipe(msgs <-chan amqp.Delivery, pubCh amqp.Channel, subCh amqp.Channel) error
-	UpdateFinalRecipe(msgs <-chan amqp.Delivery, pubCh amqp.Channel, subCh amqp.Channel) error
-	GetFinalRecipe(msgs <-chan amqp.Delivery, pubCh amqp.Channel, subCh amqp.Channel) error
-	GetFinalRecipes(msgs <-chan amqp.Delivery, pubCh amqp.Channel, subCh amqp.Channel) error
-	DeleteFinalRecipe(msgs <-chan amqp.Delivery, pubCh amqp.Channel, subCh amqp.Channel) error
+	SaveFinalRecipe(msgs <-chan myrabbit.Delivery, pubCh myrabbit.Channel, subCh myrabbit.Channel)
+	UpdateFinalRecipe(msgs <-chan myrabbit.Delivery, pubCh myrabbit.Channel, subCh myrabbit.Channel)
+	GetFinalRecipe(msgs <-chan myrabbit.Delivery, pubCh myrabbit.Channel, subCh myrabbit.Channel)
+	GetFinalRecipes(msgs <-chan myrabbit.Delivery, pubCh myrabbit.Channel, subCh myrabbit.Channel)
+	DeleteFinalRecipe(msgs <-chan myrabbit.Delivery, pubCh myrabbit.Channel, subCh myrabbit.Channel)
 }
 
 type UserHandler interface {
-	Register(msgs <-chan amqp.Delivery, pubCh amqp.Channel, subCh amqp.Channel) error
-	UpdateUser(msgs <-chan amqp.Delivery, pubCh amqp.Channel, subCh amqp.Channel) error
-	GetUser(msgs <-chan amqp.Delivery, pubCh amqp.Channel, subCh amqp.Channel) error
-	GetUsers(msgs <-chan amqp.Delivery, pubCh amqp.Channel, subCh amqp.Channel) error
-	DeleteUser(msgs <-chan amqp.Delivery, pubCh amqp.Channel, subCh amqp.Channel) error
-
-	Login(msgs <-chan amqp.Delivery, pubCh amqp.Channel, subCh amqp.Channel) error
+	Register(msgs <-chan myrabbit.Delivery, pubCh myrabbit.Channel, subCh myrabbit.Channel)
+	UpdateUser(msgs <-chan myrabbit.Delivery, pubCh myrabbit.Channel, subCh myrabbit.Channel)
+	GetUser(msgs <-chan myrabbit.Delivery, pubCh myrabbit.Channel, subCh myrabbit.Channel)
+	GetUsers(msgs <-chan myrabbit.Delivery, pubCh myrabbit.Channel, subCh myrabbit.Channel)
+	DeleteUser(msgs <-chan myrabbit.Delivery, pubCh myrabbit.Channel, subCh myrabbit.Channel)
+	Login(msgs <-chan myrabbit.Delivery, pubCh myrabbit.Channel, subCh myrabbit.Channel)
 }

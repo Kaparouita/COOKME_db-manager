@@ -3,7 +3,7 @@ module db-manager
 go 1.20
 
 require (
-	github.com/Kaparouita/models v0.0.0-20231026102229-556cee0fc46a
+	github.com/Kaparouita/models v0.0.0-20231128140456-b56beac7bdb1
 	github.com/joho/godotenv v1.5.1
 	github.com/streadway/amqp v1.1.0
 )
@@ -18,6 +18,7 @@ require (
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/jinzhu/now v1.1.5 // indirect
 	github.com/klauspost/compress v1.16.7 // indirect
+	github.com/lib/pq v1.10.9 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/mattn/go-runewidth v0.0.15 // indirect

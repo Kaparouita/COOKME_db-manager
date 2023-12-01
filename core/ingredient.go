@@ -11,6 +11,12 @@ type IngredientService struct {
 	db ports.Db
 }
 
+func NewIngredientService(db ports.Db) *IngredientService {
+	return &IngredientService{
+		db: db,
+	}
+}
+
 //-----------------------------------MarketIngredient---------------------------------------//
 
 func (srv *IngredientService) SaveMarketIngredient(MarketIngredient *models.MarketIngredient) *models.Response {
